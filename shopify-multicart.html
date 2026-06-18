@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+        /* add multi product */
+        .ks-multiItem__add {
+            display: flex;
+        }
+
+        .addTocart__btn .two_item {
+            display: none;
+        }
+
+        .ks-subpro.visibilty-hidden {
+            display: none;
+        }
+
+        .ks-multiItem__button_section {
+            margin-left: 30px;
+        }
+
+        .ks-multiItem__row .col-6 {
+            margin-bottom: 20px;
+        }
+
+        .ks-multiItem__price {
+            margin-top: -2px;
+        }
+
+        .addTocart__btn.btn {
+            font-size: 11px;
+            letter-spacing: 1px;
+            padding: 0px 18px;
+            line-height: 0px !important;
+            height: 30px;
+            margin-top: 4px;
+        }
+
+        .addTocart__btn {
+            position: relative;
+        }
+
+        .totalBtn {
+            font-size: 12px;
+            font-weight: 600;
+            color: #000;
+        }
+
+        .prices__sign,
+        .total__price {
+            color: #2879FE;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .total__price {
+            margin-left: -4px;
+            letter-spacing: 1px;
+        }
+
+        .prices__sign {
+            padding-left: 2px;
+            letter-spacing: 0px;
+        }
+
+        .ks-multiItem_div {
+            padding: 25px 0px;
+        }
+
+        .row.multiItem__input label {
+            font-size: 12px;
+            padding-left: 5px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .multiItem__input__0 {
+            margin-bottom: 4px;
+        }
+
+        .multiItem__input__0 input {
+            cursor: pointer;
+            transform: translateY(1.2px);
+        }
+
+        .ks-multiItem_div {
+            border-top: 1px solid #2879FE;
+            border-bottom: 1px solid #2879FE;
+        }
+
+        .main__price,
+        .sub__price {
+            color: #2879FE;
+            font-weight: 700;
+        }
+
+        .plus_icon {
+            color: #000;
+            font-size: 20px;
+            padding: 0 6px;
+        }
+
+        .ks__display_none {
+            display: none !important;
+        }
+
+        .addTocart__btn .first_item {
+            display: none;
+        }
+
+        /* Loader On BUTTON */
+        .ks__loader_btn {
+            border: 4px solid #e6e6e6;
+            border-radius: 50%;
+            border-top: 4px solid #FFA51C;
+            border-right: 4px solid #FFA51C;
+            width: 20px;
+            height: 20px;
+            -webkit-animation: spinner 2s linear infinite;
+            animation: loader 2s linear infinite;
+            background: transparent;
+            margin-left: 8px;
+        }
+
+        @-webkit-keyframes loader {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes loader {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .ks_info_text {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .ks_info_text .ks_alert__icon {
+            width: 18px;
+            margin-right: 4px;
+        }
+
+        .ks_info_text sapn.alert__info {
+            font-size: 12px;
+            color: #000000;
+            font-weight: 500;
+        }
+
+        sapn.sub__productTitle {
+            color: #000000;
+        }
+
+        label.product__label .ks_span__protitle {
+            color: #000 !important;
+            font-weight: 700;
+        }
+
+        sapn.main__productTitle {
+            color: #000000;
+        }
+
+        input.mainProduct__info.hideShow__js {
+            pointer-events: none;
+        }
+
+        .ks__row_block {
+            padding: 20px;
+            background: #fafafa;
+            border: double 4px #e7e7e7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .ks-multiItem__addItem {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+    </head>
+
+    <body>
+        {% if product.metafields.custom.pout_of_stock_related_products.value !=
+        blank %}
+        {% assign collectiondata =
+        product.metafields.custom.pout_of_stock_related_products.value %}
+        {% assign display__size = 0 %}
+        {% assign counting = 1 %}
+        {% assign countings = 1 %}
+        {% assign inputList = 1 %}
+        <div class="ks-multiItem_div">
+            <div class="ks-multiItem__container container">
+                <div class="row">
+                    <div class="ks-multiItem__title col-12">
+                        <h4 class="title">Buy it with:</h4>
+                    </div>
+                    <div class="ks-multiItem__product_col col-12">
+                        <div class="row ks-multiItem__row">
+                            <div class="col-7">
+                                <div class="ks__row_block">
+                                    <div
+                                        class="ks-multiItem__mainProduct ks__mainPrice_js">
+                                        <div class="ks-main-product wrapper">
+                                            <img
+                                                src="{{ product.featured_image | img_url: '100x' }}" />
+                                            <input
+                                                class="ks-subpro visibilty-hidden"
+                                                data-ksprice="{{ product.price | money }}" />
+                                        </div>
+                                    </div>
+
+                                    {% for pitem in collectiondata %}
+                                    {% assign productKs = all_products[pitem] %}
+                                    {% assign display__size = display__size |
+                                    plus: 1 %}
+                                    {% if display__size < 3 %} <div
+                                        class="ks-multiItem__addItem ks__price_js"
+                                        id="ks__add_{{ display__size }}">
+                                        <span class="plus_icon">+</span>
+                                        <a href="{{ productKs.url }}"
+                                            class="ks-item-anchor">
+                                            <span>
+                                                <img
+                                                    src="{{ productKs.images[0] | img_url: '100x' }}" />
+                                            </span>
+                                        </a>
+                                        <input
+                                            class="ks-subpro visibilty-hidden"
+                                            data-ksprice="{{ productKs.price | money }}" />
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+
+                                    <div class="ks-multiItem__button_section">
+                                        <p
+                                            class="ks-multiItem__price tt-prices ks_tt_prices">
+                                            <span class="totalBtn">Total Price:
+                                            </span>
+                                            <span class="prices__sign">$</span>
+                                            <span
+                                                class="total__price new-prices"></span>
+                                        </p>
+                                        <button class="addTocart__btn btn">
+                                            <span
+                                                class="first_item btn__item">Add
+                                                to Cart</span>
+                                            <span class="two_item btn__item">Add
+                                                both to Cart</span>
+                                            <span
+                                                class="three_item btn__item">Add
+                                                all three to cart</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row multiItem__input">
+                            <div class="col-12">
+                                <div class="ks_info_text">
+                                    <img
+                                        src="https://cdn.shopify.com/s/files/1/0356/7963/3540/files/warning.png?v=1663753725"
+                                        class="ks_alert__icon" />
+                                    <sapn class="alert__info">Some of these
+                                        items ship sooner than the
+                                        others.</sapn>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="multiItem__input__0">
+                                    <input type="checkbox"
+                                        class="mainProduct__info hideShow__js"
+                                        checked>
+                                    <label for class="product__label">
+                                        <sapn class="ks_span__protitle">Product
+                                            title: </sapn>
+                                        <sapn class="main__productTitle">{{
+                                            product.title }}</sapn>
+                                        <sapn class="main__price">{{
+                                            product.price | money }}</sapn>
+                                    </label>
+                                </div>
+
+                                {% for pitems in collectiondata limit:2 %}
+                                {% assign productKss = all_products[pitems] %}
+                                <div class="multiItem__input__0"
+                                    id="ks__multiCheck{% increment inputList %}">
+                                    <input type="checkbox"
+                                        class="product__infos ks_checked__js ks_checked_variatJS hideShow__js"
+                                        id="ks_checkbox__{% increment counting %}"
+                                        value="{{ productKss.selected_or_first_available_variant.id }}"
+                                        checked>
+                                    <label
+                                        for="ks_checkbox__{% increment countings %}"
+                                        class="product__labelItem">
+                                        <sapn class="sub__productTitle">{{
+                                            productKss.title }}</sapn>
+                                        <sapn class="sub__price">{{
+                                            productKss.price | money }}</sapn>
+                                    </label>
+                                </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endif %}
+
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+            integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+            crossorigin="anonymous"></script>
+
+        <script>
+        let addTocart__btn = document.querySelector(".addTocart__btn");
+        let ks__pricejs = document.querySelectorAll(".ks__price_js")
+        let ks__checked = document.querySelectorAll(".ks_checked__js")
+        let hideShow__js = document.querySelectorAll(".hideShow__js")
+        let item_first = document.getElementById("ks__add_1");
+        let item_second = document.getElementById("ks__add_2");
+        let first_listInput = document.getElementById("ks__multiCheck0");
+        let second_listInput = document.getElementById("ks__multiCheck1");
+        let first_btn = document.querySelector(".first_item");
+        let second_btn = document.querySelector(".two_item");
+        let third_btn = document.querySelector(".three_item");
+        let check__count = document.querySelectorAll('input.hideShow__js[type="checkbox"]:checked').length;
+
+        var original__price = [];
+
+        function updateCartMiniShopy() {
+            jQuery.getJSON('/cart.js', function (cart) {
+                addToCartHandler.updateGeneralInfo(cart);
+                addedModal.initGeneralInfo(cart);
+
+                $.each(cart.items, function (key, line_item) {
+                    var _parent = $('header').find('.tt-cart');
+                    var _empty_cart = $('.tt-cart-empty');
+                    var _ul = _parent.find('.tt-cart-list');
+
+                    var price_str = getItemFormatedPrice(line_item.price);
+                    var _ = $('.item-html-js').children().clone();
+                    _.find('.tt-title').html(line_item.product_title);
+                    _.find('.tt-price').html(price_str);
+                    _.find('.qty').html(line_item.quantity);
+                    _.find('>a:first-child').attr('href', line_item.url);
+
+                    var _img = _.find('.tt-item-img').empty();
+                    $('<img src=' + line_item.image + ' alt="Cart Image">').appendTo(_img);
+
+                    var _details = _.find('.details');
+                    line_item.variant_title == null ? _details.parent().remove() : _details.html(line_item.variant_title.replace(/ \//g, ', '));
+
+                    var delete_btn = _.find('.header_delete_cartitem_js');
+                    var delete_url = String(delete_btn.attr('href')).replace('id=0', 'id=' + line_item.id);
+                    delete_btn.attr('href', delete_url);
+
+                    _ul.find('[href="' + delete_url + '"]').length && _ul.find('[href="' + delete_url + '"]').closest('.tt-item').remove();
+                    $(_).prependTo(_ul);
+                    !_empty_cart.hasClass('hide') && _empty_cart.addClass('hide');
+
+                    var tt_cb = _parent.find('.tt-cart-box');
+                    tt_cb.hasClass('hide') && tt_cb.removeClass('hide');
+
+                    var _ul_children = _ul.children();
+                    _ul_children.length && _ul_children.hide();
+                    _ul_children.each(function (index) {
+                        if (index >= 3) return false;
+                        $(this).show();
+                    });
+                    _ul_children.length > 3 && $('.header-cart-more-message-js').show();
+                });
+
+            });
+        }
+
+        function ks_multi_proprice() {
+            let product_Items = document.querySelectorAll(".ks-subpro")
+            let total__price = document.querySelector(".total__price")
+            var price_arr = [];
+            var total__value = 0;
+            product_Items.forEach((e, i) => {
+                price_arr.push(e.getAttribute("data-ksprice").replace('$', ''));
+                original__price.push(e.getAttribute("data-ksprice").replace('$', ''));
+            })
+            for (i = 0; i < price_arr.length; i++) {
+                total__value += parseFloat(price_arr[i])
+            }
+            total__price.innerHTML = total__value;
+        }
+
+        ks_multi_proprice();
+
+        $(function () {
+            $("input.hideShow__js:checkbox").on("change", function () {
+                var lenghtOfUnchecked = $('input.hideShow__js:checkbox:not(:checked)').length;
+                var sum_num = check__count - lenghtOfUnchecked;
+
+                if (sum_num == 2) {
+                    $(".first_item").attr('style', 'display: none');
+                    $(".two_item").attr('style', 'display: block');
+                    $(".three_item").attr('style', 'display: none');
+                }
+                else if (sum_num == 1) {
+                    $(".first_item").attr('style', 'display: block');
+                    $(".two_item").attr('style', 'display: none');
+                    $(".three_item").attr('style', 'display: none');
+                }
+                else {
+                    $(".first_item").attr('style', 'display: none');
+                    $(".two_item").attr('style', 'display: none');
+                    $(".three_item").attr('style', 'display: block');
+                }
+            });
+        });
+
+        ks__checked.forEach((e, i) => {
+            e.addEventListener("change", (el) => {
+                if (el.target.checked == false & i == 0) {
+                    item_first.classList.add("ks__display_none")
+                    multiPrice_remove(item_first)
+                    first_listInput.setAttribute("style", "opacity: 0.5")
+                }
+                if (el.target.checked == false & i == 1) {
+                    item_second.classList.add("ks__display_none")
+                    multiPrice_remove(item_second)
+                    second_listInput.setAttribute("style", "opacity: 0.5")
+                }
+                if (el.target.checked == true & i == 0) {
+                    item_first.classList.remove("ks__display_none")
+                    let item_price = original__price[i + 1]
+                    multiPrice_update(item_first, item_price)
+                    first_listInput.setAttribute("style", "opacity: 1")
+                }
+                if (el.target.checked == true & i == 1) {
+                    item_second.classList.remove("ks__display_none")
+                    let item_price = original__price[i + 1]
+                    multiPrice_update(item_second, item_price)
+                    second_listInput.setAttribute("style", "opacity: 1")
+                }
+            })
+        })
+
+        function multiPrice_remove(items) {
+            children = items.children[2].setAttribute("data-ksprice", "0");
+            setTimeout(function () {
+                ks_multi_proprice();
+            }, 100)
+        }
+
+        function multiPrice_update(items, price) {
+            children = items.children[2].setAttribute("data-ksprice", price);
+            setTimeout(function () {
+                ks_multi_proprice();
+            }, 100)
+        }
+
+        // ADD to CART
+        function updateItemByLine(product_id, quantity) {
+            var data = {
+                quantity: quantity,
+                id: product_id
+            };
+
+            jQuery.post('/cart/add.js', data, function (response) {
+            });
+        }
+
+        function checked_value() {
+            let ks__checkedItem = document.querySelectorAll(".ks_checked_variatJS");
+            var productK = [];
+            ks__checkedItem.forEach((e, i) => {
+                if (e.checked == true) {
+                    var variantID = e.getAttribute("value");
+                    productK.push(variantID);
+                }
+            });
+
+            // Spinner Loader Start
+            var loaderBTN = document.createElement('span');
+            loaderBTN.setAttribute('class', 'ks__loader_btn');
+            loaderBTN.setAttribute('id', `spanLoaderBtn`);
+            addTocart__btn.appendChild(loaderBTN);
+            // Spinner Loader End
+
+            setTimeout(() => {
+                console.log(productK);
+                updateItemByLine(productK, 1);
+            }, 1000);
+        }
+
+        jQuery(document).ready(function ($) {
+            $("body").on("click", ".addTocart__btn", function () {
+                checked_value();
+                setTimeout(() => {
+                    var loaderRemove = document.querySelector('.ks__loader_btn');
+                    loaderRemove.remove();
+                    $(".btn-addtocart").trigger('click');
+                    setTimeout(() => {
+                        updateCartMiniShopy();
+                    }, 500);
+                }, 3000);
+            });
+        });
+
+
+    </script>
+    </body>
+
+</html>

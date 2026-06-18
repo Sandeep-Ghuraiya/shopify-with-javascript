@@ -1,0 +1,1300 @@
+{% comment %} Recent Views {% endcomment %}
+
+<style>
+
+  .mmt-title-wrapper {
+      border-bottom: 2px solid rgba(0,0,0,30%);
+  }
+  
+  h2.mmt-title {
+      margin-bottom: 2px;
+      text-align: start;
+  }
+  .mmt_container{
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;  
+      position: relative;
+  }
+
+  /* Grid Layout */
+  .mmt_grid{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+    padding: 0;
+    list-style: none;
+    gap: 10px;
+  }
+
+  .mmt_card-wrapper {
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      text-decoration: none;
+      align-items: stretch;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+      width: 100%;
+      height: 100%;
+      min-height: 48rem;
+      padding-bottom: 16px;
+  }
+  
+  .mmt_card-wrapper {
+      box-shadow: 0px 0px 5px 0px rgb(0 0 0 / 15%);
+  }
+  
+/*   .mmt_card-information {
+      border: 1px solid;
+      height: 100%;
+      min-height: 130px;
+  } */
+  
+  .mmt_card-information__wrapper {
+      width: 100%;
+  }
+
+  .mmt_card-information__wrapper>* {
+      line-height: calc(1 + .4 / var(--font-body-scale));
+      color: rgb(var(--color-foreground));
+  }
+  
+  .mmt_card-information__text {
+      display: block;
+      margin: 0;
+  }
+
+  .mmt_full-link {
+      text-decoration: none;
+      color: #000000;
+      display: block;
+  }
+
+  h3.mmt_card-information__text {
+      text-align: center;
+  }
+  @media only screen and (min-width: 768px){
+    .mmt_h5 {
+      font-size: 16px;
+      line-height: 25px;
+      letter-spacing: 0px;
+      color: #000000;
+    }
+  }
+
+  /* IMAGE Layout */
+  
+
+  .mmt_card__inner {
+      width: 100%;
+      max-width: 100%;
+      position: relative;
+  }
+  
+  .mmt_card__inner .mmt_card_media {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      padding-bottom: 80%;
+      max-width: 100%;
+      display: block;
+  }
+
+  .mmt_price__regular {
+      text-align: center;
+      color: #007bff;
+      font-weight: 600;
+      padding-top: 10px;
+      font-size: 18px;
+  }
+  
+  .mmt_card__inner img.mmt_card__image {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+      height: 100%;
+      object-position: center;
+      object-fit: cover;
+  }
+  .mmt_card__inner .mmt_img2{
+    display: none;
+  }
+
+  .mmt_card-wrapper:hover .mmt_card__inner .mmt_img2{
+    display: block;
+  }
+
+  .mmt_card-wrapper:hover .mmt_card__inner .mmt_img1{
+    display: none;
+  }
+
+  .mmt_visually-hidden--inline {
+      margin: 0;
+      height: 1em;
+  }
+  .mmt_visually-hidden {
+      position: absolute!important;
+      overflow: hidden;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      border: 0;
+      clip: rect(0 0 0 0);
+      word-wrap: normal!important;
+  }
+
+  button.cart_link {
+      width: fit-content;
+      border: none;
+      border-radius: 5px;
+      display: inline-block;
+      background-color: #007bff;
+      font-size: 15px;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: 500;
+      letter-spacing: 0px;
+      line-height: 42px;
+      color: #fff;
+      padding: 0 16px;
+      position: relative;
+  }
+  
+  .add_to_cartBTN {
+      text-align: end;
+      margin: 10px 0;
+  }
+
+  .sold_out_BTN{
+      text-align: end;
+      display: none;
+  }
+
+  .mmt_card-information__wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      align-content: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      width: 100%;
+      padding: 14px 14px 10px
+  }
+
+  .mmt_card__badge {
+      position: absolute;
+      bottom: 10px;
+      left: 14px;
+      z-index: 2;
+  }
+
+  
+
+  .mmt_cart__wrapper {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 14px;
+  }
+
+.mmt_cart__wrapper >div:first-child {
+    width: 35%;
+}
+
+.mmt_cart__wrapper>div:last-child {
+    width: 60%;
+}
+
+.mmt_quantity_section {
+    width: 100%;
+}
+
+.mmt_quantity_wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    border: 1px solid #ced4da;
+    border-radius: 2px;
+}
+
+.select_optionBTN {
+    text-align: end;
+    margin: 10px 0;
+}  
+  
+.mmt_form-control {
+    width: 100%;
+    min-width: 85px;
+    text-align: center;
+    appearance: none;
+    /* padding: 12px 0px; */
+    height: 100%;
+    min-height: 40px;
+    border-radius: 5px;
+    border: none !important;
+}
+
+.mmt_form-control {
+    width: 100%;
+    min-width: 90px;
+    text-align: center;
+    appearance: none;
+    /* padding: 12px 0px; */
+    height: 100%;
+    min-height: 40px;
+    border-radius: 5px;
+    border: 1px solid;
+}
+
+span.input-group-btn.min_span, span.input-group-btn.max_span {
+    position: absolute;
+    top: 0px;
+    width: 25px;
+    height: 100%;
+    border: none;
+    text-align: center;
+}
+
+span.input-group-btn.min_span{
+    left: 0;
+    border-right: 1px solid #ced4da;
+}  
+
+span.input-group-btn.max_span {
+    right: 0;
+    border-left: 1px solid #ced4da;
+} 
+
+button{
+  cursor: pointer;
+}  
+  
+.mmt_quantity_wrapper button.btn {
+    border: none;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #E8E8E6;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}  
+    
+
+  /* desktop tablet css */
+  @media(min-width: 768px){
+     .mmt_grid__col li.mmt_grid__item {
+        width: calc(50% - 10px);
+        max-width: 48%;
+        flex: 0 0 49%;
+        padding: 20px 10px;
+    }
+  }
+
+    @media(min-width: 990px){
+       .mmt_grid__col li.mmt_grid__item {
+          width: calc(33.33% - 10px);
+          max-width: 32%;
+          flex: 0 0 32.5%;
+          padding: 20px 10px;
+      }
+    }
+
+  @media(min-width: 1020px){
+     .mmt_grid__col li.mmt_grid__item {
+        width: calc(25% - 10px);
+        max-width: 24%;
+        flex: 0 0 24.5%;
+        padding: 12px 10px;
+    }
+  }
+
+  
+  /* mobile css */
+  @media(max-width: 767px){
+    .mmt_grid__col li.mmt_grid__item {
+        width: 100%;
+        max-width: 100%;
+        flex: 0 0 100%;
+        padding: 14px 2px;
+    }
+  }
+
+/* Popup Modal CSS  */
+.mmt_variant_modal {
+    position: fixed;
+    z-index: 4;
+    left: 0px;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    display: none;
+}
+
+.mmt_modal-content{
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #fff;
+    max-height: 400px;
+    height: 100%;
+    overflow-y: scroll;
+    border-radius: 10px;
+}  
+
+.mmt_variant_modal-dialog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.mmt_ul_items {
+    width: 100%;
+    padding: 0 20px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+}
+
+li.mmt_list_grid {
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #c4c4c4;
+}
+
+.mmt_row_grid {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mmt_col__item {
+    width: 25%;
+}
+
+a.mmt_variant_link.a_link {
+    text-decoration: none;
+    width: 100%;
+}
+
+.mmt_img_wrapperItem {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+img.mmt_variant_img {
+    width: 100%;
+    max-width: 220px;
+    height: auto;
+}
+
+.mmt_row_grid > div:first-child {
+    width: 50px;
+}
+
+.mmt_row_grid > div:last-child {
+    width: 60%;
+}
+
+.mmt_variation_flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mmt_variant_ {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mmt_modal-header {
+    padding: 12px 20px;
+    border-bottom: 1px solid #c4c4c4;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 4;
+    box-shadow: 0px 0px 12px 0px #c4c4c4;
+}
+
+.mmt_modal-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+button.mmt_modal_closeBTN {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    background: transparent;
+    border: none;
+    width: 38px;
+    height: 38px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: red;
+    z-index: 20;
+}
+
+.force-overflow
+{
+	min-height: 600px;
+    height: 100%;
+} 
+
+/* STYLE 3 */
+
+#style-3::-webkit-scrollbar-track{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+    border-radius: 10px;
+}
+
+#style-3::-webkit-scrollbar{
+	width: 6px;
+	background-color: #F5F5F5;
+}
+
+#style-3::-webkit-scrollbar-thumb{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: grey;
+}
+
+.mmt_variants_item_wrapper {
+    width: 100%;
+    padding: 10px 0 8px;
+}
+
+.mmt-form-check-input {
+    width: 20px !important;
+    height: 20px;
+}
+
+h3.mmt_variant_title.h3 {
+    font-size: 18px;
+    margin: 6px 0;
+    color: blue;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.mmt_variant_text {
+    color: #000;
+    font-weight: 500;
+} 
+
+.product_V_from {
+    width: 35%;
+    max-width: 125px;
+    position: relative;
+    border: 1px solid #c4c4c4;
+}
+
+.product_V_from button.btn {
+    border: none;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #E8E8E6;
+    cursor: pointer;
+    font-size: 20px;
+}  
+
+a.a_link {
+    color: #314235;
+    text-decoration: none;
+}  
+.mmt_content__grid>div:first-child {
+    margin-bottom: 8px;
+}
+span.varient_price {
+    color: #007bff;
+    font-weight: 600;
+    font-size: 18px;
+}  
+.variant_btn_wrapper {
+    width: 50%;
+    text-align: end;
+} 
+
+/* Loader */
+.span_loader{
+  margin-left: 10px;
+}  
+
+/* View Cart Page */
+.add_to_cartBTN {
+    text-align:end;
+    margin: 10px 0;
+    position: relative;
+}  
+
+.mmt_viewCart_link {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 35px;
+    color: #007BFF;
+    text-decoration: none;
+    cursor: pointer;
+    position: absolute;
+    width: 75%;
+    right: 0px;
+}
+  
+.add_to_cartBTN .mmt_viewCart_link {
+    bottom: -25px;
+    text-align:center;
+}  
+
+.variant_btn_wrapper .mmt_viewCart_link {
+    bottom: -34px;
+}   
+  
+.variant_btn_wrapper {
+  text-align: end;
+  position: relative;
+}  
+  
+/* Media Query */
+@media only screen and (min-width: 1281px) and (max-width: 1400px){
+  .mmt_cart__wrapper >div:first-child {
+      width: 38%;
+  }
+  .mmt_cart__wrapper>div:last-child {
+      width: 58%;
+  }
+
+  .mmt_card-wrapper {
+      min-height: 46rem;
+  }
+  .mmt_cart__wrapper {
+      padding: 0 12px;
+  }
+  span.input-group-btn.min_span, span.input-group-btn.max_span {
+      width: 22px;
+  }
+  .mmt_form-control {
+      min-height: 30px;
+      border: 1px solid #c4c4c4;
+  }
+
+  button.cart_link {
+      font-size: 13px;;
+      line-height: 35px;
+      padding: 0 12px;
+  }
+}    
+
+@media only screen and (min-width: 1020px) and (max-width: 1280px){
+  .mmt_card-wrapper {
+      min-height: 44rem;
+      padding-bottom: 8px;
+  }
+  .mmt_grid__col li.mmt_grid__item {
+      padding: 15px 6px;
+  }
+  .mmt_cart__wrapper >div:first-child {
+      width: 38%;
+  }
+  .mmt_cart__wrapper>div:last-child {
+      width: 55%;
+  }
+  .mmt_cart__wrapper {
+      padding: 0 12px;
+  }
+  span.input-group-btn.min_span, span.input-group-btn.max_span {
+      width: 20px;
+  }
+  .mmt_form-control {
+      min-height: 30px;
+      min-width: 65px;
+      border: 1px solid #c4c4c4;
+  }
+
+  button.cart_link {
+      font-size: 10px;;
+      line-height: 35px;
+      padding: 0 12px;
+  }
+}  
+
+@media only screen and (min-width: 1019px) and (max-width: 990px){
+    .mmt_cart__wrapper >div:first-child {
+        width: 32%;
+    }
+    .mmt_cart__wrapper>div:last-child {
+        width: 58%;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 989px){
+  .mmt_variant_ {
+      align-items: flex-start;
+      flex-direction: column;
+  }
+  .mmt_variation_flex {
+      align-items: flex-start;
+      flex-direction: column;
+  }
+  .mmt_variant_ > div {
+      margin-bottom: 16px;
+  }
+  .variant_btn_wrapper {
+      width: 50%;
+      text-align: start;
+  }
+
+  .mmt_modal-content{
+      max-width: 600px;
+      max-height: 400px;
+  } 
+
+  .mmt_row_grid > div:last-child {
+      width: 40%;
+  }
+  .mmt_col__item {
+      width: 40%;
+  }
+  .product_V_from {
+      width: 100%;
+      max-width: 160px;
+  }
+  .variant_btn_wrapper {
+      width: 100%;
+  } 
+} 
+
+@media only screen and (max-width: 480px){
+  .mmt_card__inner .mmt_card_media {
+      padding-bottom: 85%;
+  }
+  .mmt_card-wrapper {
+      min-height: 46rem;
+      padding-bottom: 8px;
+  }
+}  
+@media only screen and (max-width: 380px){
+  .mmt_cart__wrapper {
+      flex-direction: column;
+  }
+  .mmt_cart__wrapper >div:first-child {
+      width: 100%;
+  }
+  .mmt_cart__wrapper>div:last-child {
+      width: 100%;
+      margin-top: 10px;
+  }
+  button.cart_link {
+      max-width: 100%;
+  }
+}
+
+@media(max-width: 767px){
+    .mmt_row_grid {
+        flex-wrap: wrap;
+    }
+    .mmt_row_grid > div:last-child {
+        width: 100%;
+    }
+    .mmt_col__item {
+        width: 80%;
+    }
+
+    .mmt_modal-content{
+        max-width: 400px;
+        max-height: 400px;
+    }
+}
+
+.mmt-title--primary {
+    text-align: center;
+    font-weight: 500;
+    text-transform: uppercase;
+}  
+  
+@media(min-width: 768px){
+  .mmt-title--primary {
+      font-size: 35px;
+  }
+}
+
+@media(max-width: 767px){
+  .mmt-title--primary {
+      font-size: 25px;
+  }
+}  
+  
+</style>
+
+<div class="mmt_container">
+  <div class="mmtapp-heading__section" id="mmt-app-grid"">
+    <div class="mmt_loading-overlay mmt-gradient"></div>
+    <div class="mmt-title-wrapper mmt-center">
+      <h2 class="mmt-title mmt-title--primary">
+        <span class="">Recent Views</span>
+      </h2>
+    </div>
+  </div>
+  <div class="mmt_recent_view_section">
+    <div class="mmt_loading-overlay mmt-gradient"></div>    
+    <ul id="ul_reactView_product-grid" class="mmt_grid grid negative-margin mmt_grid_coljs mmt-product-grid mmt_grid__col">       
+    </ul>   
+  </div> 
+</div>
+
+<!--  Varient Modal -->
+<div class="mmt_variant_modal mmt_fade" id="variantRecentModal" tabindex="-1" role="dialog">
+  <div class="mmt_variant_modal-dialog mmt_modal-dialog-centered" role="document">
+      <div class="mmt_modal-content" id="style-3">
+        <div class="force-overflow">
+            <div class="mmt_modal-header">
+                <h3 class="mmt_modal-title" id="variantModalLongTitle">
+                    Select Varient
+                </h3>
+                <button type="button" class="mmt_modal_closeBTN" data-dismiss="modal" aria-label="Close" id="mmt_closeRecentModal">
+                    <span aria-hidden="true"><i class="fa fa-times"></i></span>
+                </button>
+            </div>
+            <div class="mmt_modal-body" >
+                <div class="mmt_items__wrapper">
+                    <ul class="mmt_ul_items" id="variant_recent__modal">
+                    </ul>
+                </div>  
+            </div>
+        </div>        
+      </div>
+  </div>
+</div>
+
+<script>
+  function reactView_blockfn(){
+    let grid_container = document.getElementById("ul_reactView_product-grid");
+    let mmt_closeModal = document.getElementById("mmt_closeRecentModal");
+
+    // popup modal after 2 min
+    // var modalpop = document.getElementById("ksmyModal");
+    // var myModal = document.getElementById("myModal");
+
+    // const myTimeout = setTimeout(function () {
+    //     showModalPopup()
+    // }, 5000);
+  
+    mmt_closeModal.addEventListener("click", (e) =>{
+       document.getElementById("variantRecentModal").style.display = "none";
+       window.location.reload(); 
+    })
+
+    // function showModalPopup() {
+
+    //     document.getElementById("myModal").style.backgroundColor = "rgba(0,0,0,0.4)";
+
+    //     document.getElementById("modal2").innerHTML = data1
+    //     document.getElementById("myModal").style.display = "block";
+    //     // procuctQuantity();
+    //     // showAddTocard();
+    //     modalQuantity();
+    //     popUpAddTocard()
+
+    // };
+
+  
+    // Product Doller price code
+    let usd_price = [];
+    let usd_price2 = [];
+    let usd_price_v = [];
+  
+    function get_only_price(string) {
+        var varients_price = string.replace(",", "");
+        varients_price = varients_price.replace(/[^0-9,.]*/, "");
+        varients_price = parseFloat(varients_price);
+        US_price_format(varients_price);
+    }
+  
+    function get_only_price2(string) {
+        var varients_price = string.replace(",", "");
+        varients_price = varients_price.replace(/[^0-9,.]*/, "");
+        varients_price = parseFloat(varients_price);
+        US_price_formatCopy(varients_price)
+    }
+  
+    function US_price_format(price) {
+        var formater = new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+        });
+        usd_price.push(formater.format(price));
+    }
+  
+    function US_price_formatCopy(price) {
+        var formater = new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+        });
+        usd_price2.push(formater.format(price));
+    }
+
+    // Varient Doller Price
+    function US_price_format_v(Vprice) {
+        let varients_price = parseFloat(Vprice);
+        var formater = new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+        });
+        usd_price_v.push(formater.format(varients_price));
+    }
+  
+    let url = 'http:{{ 'product_data.json' | asset_url }}';
+
+    fetch(url)
+    .then(res => res.json())
+    .then((data) => {
+      let product_data = data;
+      product_gridFn(product_data)
+    })
+    .catch(err => { throw err });   
+   
+  // timeDiv.innerHTML = '';
+    function product_gridFn(product_data){
+      setTimeout(function(){
+        
+        let mmt_product_Data = product_data.products;
+        console.log("Product data: ", mmt_product_Data)
+        
+        let data1 = "";
+        let modal;
+        
+        mmt_product_Data.forEach((ele, i) => { 
+          get_only_price(ele.variants[0].price);
+      
+         if(i < 4) {
+          data1 += `<li class="mmt_grid__item">
+                <div class="mmt_card-wrapper">
+                  <div class="mmt_contenWithimage">
+                    <a href="#" class="mmt_card mmt_card--product" alt="product_link">
+                        <div class="mmt_card__inner">
+                            <div class="mmt_product_image_section">
+                                <div class="mmt_card_media mmt-transparent media--square mmt--hover-effect">
+                                    <img src="//cdn.shopify.com/s/files/1/0471/0698/2044/products/7-chakra-bracelet_925x_56334c2a-fe85-4a78-ae6f-bb8494b258ff_533x.jpg?v=1614964099"
+                                        alt="7 Shakra Bracelets IIIIP" loading="lazy" class="mmt_card__image mmt_img1">
+                                    <img src="${ele.images[0].src}"
+                                        alt="7 Shakra Bracelets IIIIP" loading="lazy" class="mmt_card__image mmt_img2">
+                                </div>
+                            </div>
+                            ${ele.variants[0].inventory_quantity > 0 ? `<div class="mmt_card__badge">
+                              <span class="badge badge--bottom-left color-accent-2">Sale</span>
+                            </div>`: `<span class="hidden"></span>` }   
+                        </div>
+                    </a>
+                    <div class="mmt_card-information">
+                        <div class="mmt_card-information__wrapper">
+                            <h3 class="mmt_card-information__text mmt_h5">
+                                <a href="#" class="mmt_full-link mmt_fullTitle_link a_link" id="${i}" data-titlename="${ele.title}">
+                                    ${ele.title}
+                                </a>
+                            </h3>
+                            <div class="mmt_price  mmt_price-sale ">
+                                <div>
+                                    <div class="mmt_price__regular">
+                                        <span class="mmt_visually-hidden mmt_visually-hidden--inline">Regular price</span>
+                                        <span 
+                                          class="mmt_price-item mmt_price-item--regular product_price" 
+                                          data-price="${ele.variants[0].price}" data-indexNumber="${i}"> 
+                                          ${usd_price[i]}
+                                        </span>
+                                    </div>
+                                    <!--<div class="mmt_price__sale">
+                                        <span class="mmt_visually-hidden mmt_visually-hidden--inline">Regular price</span>
+                                        <span>
+                                            <s class="mmt_price-item mmt_price-item--regular">
+        
+                                                Rs. 44.99
+        
+                                            </s>
+                                        </span>
+                                        <span class="mmt_visually-hidden mmt_visually-hidden--inline">Sale price</span>
+                                        <span class="mmt_price-item mmt_price-item--sale mmt_price-item--last">
+                                            Rs. 42.99
+                                        </span>
+                                    </div>-->
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                      ${ele.variants.length > 1 ? `<div class="mmt_cartwith_input_section">
+                      <div class="mmt_cart__wrapper">
+                          <div class="mmt_quantity_section">
+                              <div class="mmt_quantity_wrapper">
+                                  <span class="input-group-btn min_span">
+                                      <button class="btn btn-default Topbtn-subtract minus_recentBtn" id=${i} type="button">-</button>
+                                  </span>
+              
+                                  <input type="number" class="mmt_form-control no-padding text-center itemQuantity" id=${i} min="1"
+                                      value="1" product_quantity="1">
+              
+                                  <span class="input-group-btn max_span">
+                                      <button class="btn btn-default Topbtn-add plus_recentBtn" id=${i} type="button">+</button>
+                                  </span>
+              
+                              </div>
+                          </div>
+                          <div class="mmt_addToCart_wrapper">
+                              <div class="mmt_btn_wrapper">
+                                  <div class="select_optionBTN">
+                                      <button data-index="${i}"  data-length="${ele.variants.length}" 
+                                        data-quantity=1
+                                        
+                                        class="cart_link op selectJs qvt" 
+                                        data-toggle="modal" 
+                                        data-target="#exampleModalCenter">
+                                          <span>Select Option</span>
+                                          
+                                      </button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  `:
+                  `<div class="mmt_cartwith_input_section">
+                      <div class="mmt_cart__wrapper">
+                          <div class="mmt_quantity_section">
+                              <div class="mmt_quantity_wrapper">
+                                  <span class="input-group-btn min_span">
+                                      <button class="btn btn-default Topbtn-subtract minus_recentBtn" id=${i} type="button">-</button>
+                                  </span>
+              
+                                  <input type="number" class="mmt_form-control no-padding text-center itemQuantity" id=${i} min="1"
+                                      value="1" product_quantity="1" data-Id="${ele.variants[0].id}">
+              
+                                  <span class="input-group-btn max_span">
+                                      <button class="btn btn-default Topbtn-add plus_recentBtn" id=${i} type="button">+</button>
+                                  </span>
+              
+                              </div>
+                          </div>
+                          <div class="mmt_addToCart_wrapper">
+                              <div class="mmt_btn_wrapper">
+                                  <div class="add_to_cartBTN">
+                                    <button type="button" 
+                                      class="cart_link btn-primary add-to-card add_tocard_js" 
+                                      id="${i}"
+                                      data-quantityValue="1"
+                                      data-variantID="${ele.variants[0].id}"
+                                      data-producttTitle=" ${ele.title}"
+                                      data-productPrice="${ele.variants[0].price}"
+                                      data-variants="${ele.variants[0].option1} / ${ele.variants[0].option2} / ${ele.variants[0].option3}">
+                                      <span>Add To Cart</span>    
+                                    </button>                                   
+                                  </div>
+                                  <div class="sold_out_BTN">
+                                      <a class="cart_link " href="#" alt="">
+                                          <span>Sold out</span>
+                                      </a>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>`
+                  }
+                </div>
+            </li>`;
+          }
+        });
+        grid_container.innerHTML = data1;
+
+        let select_btn = document.querySelectorAll(".selectJs");
+
+        select_btn.forEach((el, indx) => {
+          el.addEventListener("click", (evt) =>{
+            document.getElementById("variantRecentModal").style.display = "block";
+            console.log("Button: ", evt.currentTarget);
+            let num = parseInt(evt.currentTarget.getAttribute("data-index"));
+            console.log("Number: ", num)
+            let input_val = document.querySelectorAll(".itemQuantity");
+            
+            mmt_product_Data.forEach((element, index) => {
+
+              if (index == num) {
+                
+                console.log("quantity ", input_val[num].getAttribute("product_quantity"));
+                let quantity_product = input_val[num].getAttribute("product_quantity");
+                
+                document.getElementById("variant_recent__modal").innerHTML = "";
+                for (let j = 0; j < element.variants.length; j++) {
+                      US_price_format_v(element.variants[j].price);
+                      console.log(j)   
+                      document.getElementById("variant_recent__modal").innerHTML += `
+                              <li class="mmt_list_grid">
+                                  <div class="mmt_variants_item_wrapper">
+                                      <div class="mmt_row_grid">
+                                          <div class="mmt_col__item">
+                                              <input type="checkbox" class="mmt-form-check-input checkBox ${j}" name="flexRadioDefault" value="yes" id="check_${j}"  >
+                                          </div>
+                                          <div class="mmt_col__item mmt_img_item">
+                                              <a href="#" class="mmt_variant_link a_link" alt="">
+                                                  <div class="mmt_img_wrapperItem">
+                                                      ${element.images.length > 1 ? `<img src="${element.images[j].src}" class="mmt_variant_img">`:`<img src="${element.image.src}" class="mmt_variant_img">`}
+                                                  </div>
+                                              </a>
+                                          </div>
+                                          <div class="mmt_col__item mmt_content_div">
+                                              <div class="mmt_content__grid">
+                                                  <div class="mmt_content_list mmt_title__wrapper">
+                                                      <h3 class="mmt_variant_title h3">
+                                                          <a href="#" class="mmt_title_link mmt_fullTitle_link a_link" id="${j}" data-titlename="${element.title}">${element.title}</a>
+                                                      </h3>
+                                                      <div class="mmt_variation_flex">
+                                                          <div class="mmt_flex_itemList mmt_variant_textWrapper">
+                                                              <span class="mmt_variant_text" id="${j}">${element.variants[j].option1} / ${element.variants[j].option2} / ${element.variants[j].option3}</span>
+                                                          </div>
+                                                          <div class="mmt_flex_itemList mmt_variant_priceWrapper">
+                                                              <div class="mmt_variant_price">
+                                                                  <span class="varient_price product_price" data-indexNumber="${j}" data-price=${element.variants[j].price}>${usd_price_v[j]}</span>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <div class="mmt_content_list mmt_variant_quantityWithBtn">
+                                                      <div class="mmt_variant_">
+                                                          <div  class="product_B_form product_V_from input-group varient_option" id=${j}>
+                                                            <span class="input-group-btn min_span">
+                                                                <button class="btn btn-default btn-subtract Vbtn-subtract minus_recentBtn" id=${index} type="button">-</button>
+                                                            </span>
+                                        
+                                                            <input type="number" value=${quantity_product} class="mmt_form-control no-padding text-center itemQuantity" product_quantity="${quantity_product}" id="${index}" data-Id="${element.variants[j].id}"  min="1" >
+                    
+                                                            <span class="input-group-btn max_span">
+                                                                <button class="btn btn-default Vbtn-add plus_recentBtn" id=${index} type="button">+</button>
+                                                            </span>
+                                                          </div>
+                                                          <div class="variant_btn_wrapper">
+                                                              <button type="button" 
+                                                                class="cart_link btn-primary v_modal_btn variant_addTocart_button add_tocard_js" 
+                                                                id="${j}" 
+                                                                data-addid="id_${index}" 
+                                                                data-close="mmt_popup__close"
+                                                                data-variantID = "${element.variants[j].id}"
+                                                                data-quantityValue="1"
+                                                                data-producttTitle="${element.title}"
+                                                                data-productPrice="${element.variants[j].price}"
+                                                                data-variants="${element.variants[j].option1} / ${element.variants[j].option2} / ${element.variants[j].option3}">
+                                                                  <span>Add To Cart</span>                               
+                                                              </button>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </li>
+                         `;
+                  }
+                  document.getElementById('check_0').checked = true;
+                  usd_price_v = [];
+                }
+            });
+            show_AddTocard()
+            procuct_Quantity()
+            //checkBox()
+          })
+        })
+
+        // Number of product Quantity
+        function procuct_Quantity() {
+            let plus_recentBtn = document.querySelectorAll(".plus_recentBtn");
+            let minus_recentBtn = document.querySelectorAll(".minus_recentBtn");
+            let itemQuantity = document.querySelectorAll(".itemQuantity");
+            let minimum_Value = 1;
+            minus_recentBtn.forEach((e, i) => {
+                e.addEventListener("click", function (event) {
+                    itemQuantity.forEach((input, index) => {
+                        if (index == i) {
+                            if (input.value <= minimum_Value) {
+                                minus_recentBtn[index].disabled = true;
+                                return;
+                            } else {
+                                minus_recentBtn[index].disabled = false;
+                            }
+
+                            input.value--;
+                            input.setAttribute("value", input.value)
+                            input.setAttribute("product_quantity", input.value);
+                        }
+                    })
+                })
+            })
+            plus_recentBtn.forEach((ele, ind) => {
+                ele.addEventListener("click", function (event) {
+                    itemQuantity.forEach((input, index) => {
+                        if (index == ind) {
+                            if (input.value >= minimum_Value) {
+                                minus_recentBtn[index].disabled = false;
+                            }
+                            // let input_value = parseInt(input.value);
+                            // let result_num = input_digit + 1;
+                            input.value++;
+                            
+                            input.setAttribute("value", input.value)
+                            input.setAttribute("product_quantity", input.value);
+                        }
+                    })
+                })
+            })
+
+        }
+        procuct_Quantity();
+
+        /* ADD TO CART JS */
+        function show_AddTocard() {
+            let viewCard = document.querySelectorAll(".link");
+
+            let card_svg = document.querySelectorAll(".card_svg");
+            let loader = document.querySelectorAll(".loader");
+            let itemQuantity = document.querySelectorAll(".itemQuantity");
+            let product_title = document.querySelectorAll(".mmt_fullTitle_link");
+            let product_price = document.querySelectorAll(".product_price");
+            let Add_to_card = document.querySelectorAll(".add_tocard_js")
+          
+           // cart_page_link.innerHTML = "";
+            Add_to_card.forEach((element, index) => {
+                element.addEventListener("click", function (event) {
+                  let modal_id = document.getElementById("variantRecentModal");
+                  let productTitle = event.currentTarget.getAttribute("data-producttTitle");
+                  let productPrice = event.currentTarget.getAttribute("data-productPrice");
+                  let productVariants = event.currentTarget.getAttribute("data-variants");
+                  let variant_Id = event.currentTarget.getAttribute("data-variantID");
+                  let btn_id = parseInt(variant_Id);
+                  let productQuantity;
+                  
+                  let parent_element = event.currentTarget.parentElement;
+                  console.log("Element: ", parent_element);
+                  /* get no. of product */
+                  itemQuantity.forEach((e, i) => {
+                    let value_id = parseInt(e.getAttribute("data-Id"));
+                    if(btn_id == value_id){
+                      productQuantity =  parseInt(e.getAttribute("product_quantity"));
+                    }
+                  })
+
+                  let modal_close = event.currentTarget.getAttribute("data-close");
+
+                  // console.log("No of product ", productQuantity);
+                  // console.log("Product Title: ", productTitle);
+                  // console.log("Product Price: ", productPrice);
+                  // console.log("Product Variant: ", productVariants);
+                  // console.log("Product Variant: ", variant_Id);
+
+                  var productItems = [];
+                  if(productQuantity > 0){   
+                    productItems.push({"id": variant_Id, "quantity": productQuantity});
+                  }         
+                  var formData = {'items': productItems};
+                  
+                  // Spinner Loader Start
+                  var spannerLoader = document.createElement('span');
+                  var font_loader = document.createElement('i');
+                  spannerLoader.setAttribute('class', 'span_loader');
+                  spannerLoader.setAttribute('id', `loader_${index}`);
+                  font_loader.setAttribute('class', 'fas fa-circle-notch fa-spin');
+                  spannerLoader.appendChild(font_loader);
+                  event.currentTarget.appendChild(spannerLoader);
+
+                  setTimeout(() => {
+                      let remove_spinner = document.querySelector(".span_loader");
+                      addTocart_recentfn(formData, remove_spinner, modal_id, modal_close, parent_element, index);
+                  }, "1500")
+                  
+                })
+            })
+        }
+        show_AddTocard()
+      }, 200);
+    }
+  
+        function addTocart_recentfn(formData, remove_spinner, modal_id, modal_close, parent_element, index){
+          setTimeout( function() {
+            var url = '/cart/add.js';
+            fetch(url, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(formData)
+            })
+            .then(response => {
+              console.log(response);
+
+              /*Spinner remove*/ 
+              remove_spinner.remove();
+              
+              /* View card link */
+              var cart_page_link = document.createElement('a');
+              var link_span = document.createElement('span');
+              cart_page_link.setAttribute('class', 'mmt_viewCart_link');
+              cart_page_link.setAttribute('id', `cart_link_${index}`);
+              link_span.setAttribute('class', 'mmt_cartLink');
+              cart_page_link.setAttribute('href', "/cart");
+              link_span.innerHTML = "View Cart";
+              cart_page_link.appendChild(link_span);
+              parent_element.appendChild(cart_page_link);
+              
+              // if(modal_close == "mmt_popup__close"){
+              //     modal_id.style.display = "none";
+              //     window.location.reload();
+              // }
+              
+              return response.json();
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+            }); 
+          }, 300 );
+        }
+  }
+  reactView_blockfn();
+
+</script>
+
+
+

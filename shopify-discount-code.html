@@ -1,0 +1,360 @@
+SHOPIFY DAWN THEME CODE
+
+FOR SNIPPET FILE CODE
+
+{%- assign single_product = product.metafields.custom.discount_code -%}
+
+<style>
+  .ks_discount_model {
+        display: none;
+        position: fixed;
+        top: 100px;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0,0,0, 0.4);
+        left: 0px;
+        z-index: 2;
+  }
+
+  .ks_discount_popup {
+    	position: relative;
+    	width: 100%;
+    	max-width: 500px;
+    	margin: 0 auto;
+        height: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .ks_discount_header {
+      position: relative;
+    }
+    .ks_model_Close {
+      position: absolute;
+      top: 0px;
+      right: 4px;
+      z-index: 1;
+    }
+    
+   .ks_discount_model .ks_discount_title {
+      font-size: 20px;
+    }
+    .ks_discount_model ol {
+      padding-left: 20px;
+    }
+    .ks_discount_container {
+      width: 100%;
+      background: #fff;
+      border-radius: 5px;
+      max-width: 100%;
+      margin-top: 100px;
+    }
+
+  .tap__image_span {
+	color: #c4c4c4;
+}
+  
+    .ks_discount_header {
+      background: linear-gradient(90deg, rgba(255,164,28,1) 0%, rgba(255,216,20,1) 100%);
+      padding: 40px 20px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+    }
+    .ks_discount_content {
+      width: 100%;
+      padding: 10px 35px 0px;
+      display: flex;
+      justify-content: center;
+      align-items: start;
+      flex-direction: column;
+      position: relative;
+    }
+    .ks_discount_code {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: start;
+      flex-direction: column;
+      padding: 10px 30px 40px;
+    }
+  
+    .code_desp {
+      margin-top: 0px;
+    }
+  
+    .code__data {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+    }
+    .copy_code {
+      margin: 5px 0px 18px;
+      padding: 20px 60px;
+      border: 1px dotted;
+      border-radius: 10px;
+      background-color: transparent;
+      letter-spacing: 2px;
+      font-size: 18px;
+      font-weight: 600;
+      color: blue;
+      cursor: pointer;
+      width: 100%;
+    }
+  
+    .ks_discount_popup ol {
+      margin-top: 0px;
+    }
+    .tap_forCopy {
+      width: 25px;
+      height: 27px;
+      margin-right: 10px;
+      display: inline-block;
+    }
+
+    .tap__image_span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+  
+    .ks_close_btn {
+    	border: none;
+    	font-size: 20px;
+    	background-color: transparent;
+    	cursor: pointer;
+    	color: #fff;
+        font-weight: 600;
+    }
+
+/*     .ks_close_btn:hover {
+    	border: 4px solid #fff;
+        font-weight: 600;
+    }
+  
+    .ks_model_Close {
+      margin-top: 20px;
+    } */
+
+  
+    .copiedtext {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        text-align: center;
+        opacity: 0;
+        transform: translateY(-1em);
+        color: #000;
+        transition: all .500s;
+    }
+
+        .copied .copiedtext {
+            opacity: 1;
+            transform: translateY(-4em);
+        }
+
+        [id="cleared"] {
+            margin-top: 4em;
+        }
+
+        .copy_code {
+            position: relative;
+            transition: background 0.3s;
+        }
+
+        .copy_code:hover,
+        .copy_code:focus {
+            background: rgba(255,164,28,1);
+            color: #fff;
+            cursor: pointer;
+        }  
+
+</style>
+
+<div class="ks_discount_popup">
+  <div class="ks_discount_container">
+    <div class="ks_discount_wrapper">
+      <div class="ks_discount_header">
+        <div class="ks_model_Close"><button class="ks_close_btn"
+            id="closeModel"><span class="close__icon">X</span></button></div>
+        <img class="discount_img"
+          src="https://cdn.shopify.com/s/files/1/0620/3061/0627/files/gift-card.png?v=1659528424" />
+      </div>
+      <div class="ks_discount_content">
+        <h3 class="ks_discount_title">
+
+        </h3>
+        <ol>
+          <li class="ks_discount_option1"></li>
+          <li class="ks_discount_option2"></li>
+          <li class="ks_discount_option3"></li>
+        </ol>
+      </div>
+      <div class="ks_discount_code">
+        <h3 class="code_desp">Use Discount Code</h3>
+        <div class="code__data">
+          <button class="copy_code" title="copy discount code" id="copy"
+            onClick="CopyToClipboard('to-copy')">
+            <span id="to-copy" class="code _0 ks_discount_codeval"></span>
+            <span class="copiedtext" aria-hidden="true">Copied</span>
+          </button>
+          <span class="tap__image_span"> <img class="tap_forCopy"
+              src="https://cdn.shopify.com/s/files/1/0620/3061/0627/files/copy.png?v=1659528424" />tap
+            above to copy</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+        
+      var discount_Models = document.getElementById('ks__discount');
+      var close_models = document.getElementById('closeModel');
+      close_models.addEventListener("click", function(e){
+          discount_Models.classList.remove('discount_openModel');
+      }) 
+      
+      var discountBtns = document.querySelectorAll(".ks_discountBtn");
+      discountBtns.forEach((event, nums) => {
+        event.addEventListener('click', function(currentValue){
+          let popValue = currentValue.currentTarget;
+          let ks_discount_title = popValue.getAttribute('heading')
+          let ks_discount_option1 = popValue.getAttribute('point1') 
+          let ks_discount_option2 = popValue.getAttribute('point2')
+          let ks_discount_option3 = popValue.getAttribute('point3')
+          let ks_discount_codeval = popValue.getAttribute('code')
+          
+          document.querySelector('.ks_discount_title').innerHTML = ks_discount_title;
+          document.querySelector('.ks_discount_option1').innerHTML = ks_discount_option1;
+          document.querySelector('.ks_discount_option2').innerHTML = ks_discount_option2;
+          document.querySelector('.ks_discount_option3').innerHTML = ks_discount_option3;
+          document.querySelector('.ks_discount_codeval').innerHTML = ks_discount_codeval;
+          discount_Models.classList.add('discount_openModel');
+        })
+      })
+      
+        function CopyToClipboard(containerid) {
+            var btnCopy = document.getElementById("copy");
+          
+            // Create a new textarea element and give it id='temp_element'
+            var textarea = document.createElement("textarea");
+            textarea.id = "temp_element";
+          
+            // Optional step to make less noise on the page, if any!
+            textarea.style.height = 0;
+          
+            // Now append it to your page somewhere, I chose <body>
+            document.body.appendChild(textarea);
+          
+            // Give our textarea a value of whatever inside the div of id=containerid
+            textarea.value = document.getElementById(containerid).innerText;
+          
+            // Now copy whatever inside the textarea to clipboard
+            var selector = document.querySelector("#temp_element");
+            selector.select();
+            document.execCommand("copy");
+          
+            // Remove the textarea
+            document.body.removeChild(textarea);
+          
+            // Add copied text after click
+            if (document.execCommand("copy")) {
+                btnCopy.classList.add("copied");
+
+                var temp = setInterval(function () {
+                    btnCopy.classList.remove("copied");
+                    clearInterval(temp);
+                }, 600);
+
+            } else {
+                console.info("document.execCommand went wrong…");
+            }
+
+        }
+
+    </script>
+
+In Price Code BUTTON OF COUPON
+
+{% if product.metafields.custom.discount_code != blank %}
+<div class="discount_coupon">
+
+  <button class="discount_btn ks_discountBtn" id="discountButton"
+    heading="{{ product.metafields.custom.discount_code.value.description.description-heading }}"
+    point1="{{ product.metafields.custom.discount_code.value.description.point-1 }}"
+    point2="{{ product.metafields.custom.discount_code.value.description.point-2 }}"
+    point3="{{ product.metafields.custom.discount_code.value.description.point-3 }}"
+    code="{{ product.metafields.custom.discount_code.value.title }}">
+    {% if product.metafields.custom.discount_code.value.value_type ==
+    'percentage' %}
+    <span>Get {{ product.metafields.custom.discount_code.value.value | remove:
+      '-' | replace: '.0', '' }}% off discount</span>
+    {% endif %}
+    {% if product.metafields.custom.discount_code.value.value_type ==
+    'fixed_amount' %}
+    <span>Get ${{ product.metafields.custom.discount_code.value.value | remove:
+      '-' | replace: '.0', '' }} off discount</span>
+    {% endif %}
+  </button>
+
+</div>
+{% endif %}
+
+<!--  POPUP SNIPPET  For PRODUCT -->
+<div class="ks_discount_model" id="ks__discount">
+  {%- render 'ks-product-discount' -%}
+</div>
+
+<!--  POPUP SNIPPET  For COLLECTION -->
+<div class="ks_discount_model" id="ks__discount">
+  {%- include 'ks-product-discount' -%}
+</div>
+
+/* discount Button*/
+
+.price__container {
+display: flex !important;
+justify-content: flex-start;
+align-items: center;
+}
+
+.discount_coupon {
+padding-left: 12px;
+margin-top: -4px;
+}
+.discount_btn {
+border: none;
+border-radius: 5px;
+padding: 5px 15px;
+color: #fff;
+background: #065bdf;
+font-weight: 600;
+cursor: pointer;
+transition: background 1sec ease-in-out
+}
+#discountButton:hover {
+background: rgba(255,164,28,1);
+}
+
+.discount_openModel{
+display: block !important;
+}
+
+.collection .discount_coupon {
+position: absolute;
+right: -9px;
+z-index: 2;
+}

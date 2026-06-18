@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            display: -webkit-box;
+            position: relative;
+            background-color: #fff;
+        }
+
+
+        .popup_section {
+            width: 100%;
+            height: 100%;
+
+        }
+
+        .d-popup-container {
+            width: 100%;
+            height: 100%;
+            /*! max-width: ; */
+            position: relative;
+        }
+
+        .d-popup-section {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50vh;
+        }
+
+        .d-popup-Modal {
+            position: fixed;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+        }
+
+        .d-popup-overlay {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .d-popup-content {
+            width: 100%;
+            max-width: 550px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        button#modalOpenBTN {
+            border: none;
+            background: #3b2c489c;
+            color: #fff;
+            font-size: 20px;
+            letter-spacing: 1px;
+            line-height: 52px;
+            width: 200px;
+            border-radius: 5px;
+        }
+
+        button#modalOpenBTN:hover {
+            background-color: #6900ff9e;
+        }
+
+        .d-popup-content-box {
+            position: relative;
+            background-color: #F5EFE6;
+            width: 100%;
+            /*! position: absolute; */
+            padding: 45px 40px;
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        .d-popup-row-box {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .d-popup-col-box {
+            width: 100%;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            margin-bottom: 8px;
+        }
+
+        .d-popup-flex-box {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 2px 15px 10px;
+        }
+
+        .d-popup-flex-box>div:first-child {
+            width: 25%;
+        }
+
+        .d-popup-flex-box>div:nth-child(2) {
+            width: 25%;
+        }
+
+        .d-popup-flex-box>div:nth-child(3),
+        .d-popup-flex-box>div:nth-child(4) {
+            width: 12%;
+        }
+
+        .modal-btn-wrapper {
+            text-align: center;
+            width: 100%;
+            margin-top: 25px;
+        }
+
+        button.modal-btn {
+            font-size: 20px;
+            line-height: 40px;
+            letter-spacing: 1px;
+            width: 100%;
+            max-width: 150px;
+            border-radius: 4px;
+            border: none;
+            background-color: #6c757d;
+            color: #fff;
+        }
+
+        .d-modal-close {
+            text-align: right;
+        }
+
+        button#modalCloseBTN {
+            border: none;
+            background: #c4c4c4;
+            font-size: 32px;
+            position: absolute;
+            top: -16px;
+            right: -10px;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button#modalCloseBTN:hover {
+            background: #00d9ff;
+            color: #fff;
+        }
+
+        .d-popup-Modal {
+            display: none;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .fa-xmark {
+            font-size: 24px;
+            color: rgb(255 0 0 / 66%);
+        }
+
+        .fa-check {
+            font-size: 24px;
+            color: rgb(76 187 76 / 99%);
+        }
+
+        .modal_edit_icon {
+            text-align: right;
+            padding: 0 24px;
+            /* visibility: hidden; */
+            display: none;
+        }
+
+        #c-btn {
+            display: none;
+        }
+
+        #not-c-btn {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="popup_section">
+        <div class="d-popup-container">
+            <div class="d-popup-section">
+                <div class="d-popup-">
+                    <div class="d-popupBtn-wrapper">
+                        <button class="d-popup-btn" id="modalOpenBTN">
+                            <span>Open Modal</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="d-popup-Modal" id="d_modal_section">
+                <div class="d-popup-overlay"></div>
+                <div class="d-popup-content">
+                    <div class="d-popup-content-box">
+                        <div class="d-modal-close">
+                            <button class="close_BTN" id="modalCloseBTN">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="d-popup-row-box">
+                            <div class="d-popup-col-box">
+                                <div class="d-popup-flex-box">
+                                    <div class="value_wrapper">
+                                        <h3 class="modal_title">Pos1</h3>
+                                    </div>
+
+                                    <div class="text-wrapper">
+                                        <p class="modal_text">text value</p>
+                                    </div>
+
+                                    <div class="modal_edit_icon cross_iconjs">
+                                        <span><i class="fa fa-xmark"></i></span>
+                                    </div>
+
+                                    <div class="modal_edit_icon right_iconjs">
+                                        <i class="fa fa-check"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="d-popup-col-box">
+                                <div class="d-popup-flex-box">
+                                    <div class="value_wrapper">
+                                        <h3 class="modal_title">Pos1</h3>
+                                    </div>
+
+                                    <div class="text-wrapper">
+                                        <p class="modal_text">text value</p>
+                                    </div>
+
+                                    <div class="modal_edit_icon cross_iconjs">
+                                        <span><i class="fa fa-xmark"></i></span>
+                                    </div>
+
+                                    <div class="modal_edit_icon right_iconjs">
+                                        <i class="fa fa-check"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="d-popup-col-box">
+                                <div class="d-popup-flex-box">
+                                    <div class="value_wrapper">
+                                        <h3 class="modal_title">Pos1</h3>
+                                    </div>
+
+                                    <div class="text-wrapper">
+                                        <p class="modal_text">text value</p>
+                                    </div>
+
+                                    <div class="modal_edit_icon cross_iconjs">
+                                        <span><i class="fa fa-xmark"></i></span>
+                                    </div>
+
+                                    <div class="modal_edit_icon right_iconjs">
+                                        <i class="fa fa-check"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="d-popup-col-box">
+                                <div class="d-popup-flex-box">
+                                    <div class="value_wrapper">
+                                        <h3 class="modal_title">value1</h3>
+                                    </div>
+
+                                    <div class="text-wrapper">
+                                        <p class="modal_text">text value</p>
+                                    </div>
+
+                                    <div class="modal_edit_icon cross_iconjs">
+                                        <span><i class="fa fa-xmark"></i></span>
+                                    </div>
+
+                                    <div class="modal_edit_icon right_iconjs">
+                                        <i class="fa fa-check"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-btn-wrapper">
+                            <button class="modal-btn" id="modal_fnbtn">
+                                <span id="n-btn">Click</span>
+                                <span id="c-btn">Confirm</span>
+                                <span id="not-c-btn">Not Confirm</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/js/all.min.js"
+        integrity="sha512-rpLlll167T5LJHwp0waJCh3ZRf7pO6IT1+LZOhAyP6phAirwchClbTZV3iqL3BMrVxIYRbzGTpli4rfxsCK6Vw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+
+        let apisVar = "yes";
+
+        /* buttons variables */
+        let modal_CloseBTN = document.getElementById("modalCloseBTN");
+        let modal_OpenBTN = document.getElementById("modalOpenBTN");
+        let modal_fnbtn = document.getElementById('modal_fnbtn');
+
+        let d_modalSection = document.getElementById("d_modal_section");
+        let cross_icon = document.querySelectorAll(".cross_iconjs");
+        let right_icon = document.querySelectorAll(".right_iconjs");
+
+        let n_btn = document.getElementById('n-btn');
+        let c_btn = document.getElementById('c-btn');
+        let not_c_btn = document.getElementById('not-c-btn');
+
+        modal_OpenBTN.addEventListener("click", (e) => {
+            d_modalSection.style.display = "block";
+        })
+
+        modal_CloseBTN.addEventListener("click", (e) => {
+            d_modalSection.style.display = "none";
+            window.location.reload();
+        });
+
+        modal_fnbtn.addEventListener("click", (ev) => {
+
+            if (apisVar == "yes") {
+                right_icon.forEach((el) => {
+                    // el.style.visibility = "visible";
+                    el.style.display = "block";
+                })                
+                modal_fnbtn.style.backgroundColor = "rgb(78,213,199)";
+                c_btn.style.display = "block";
+                n_btn.style.display = "none";
+            }
+            else if (apisVar == "no") {
+                cross_icon.forEach((el) => {
+                    // el.style.visibility = "visible";
+                    el.style.display = "block";
+                })
+                modal_fnbtn.style.backgroundColor = '#ed5249';
+                n_btn.style.display = "none";
+                not_c_btn.style.display = "block";
+            }
+            else {
+                alert("No change")
+            }
+
+        }); 
+    </script>
+</body>
+
+</html>

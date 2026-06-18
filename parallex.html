@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopify Parallax & Lazyload Demo</title>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/bgset/ls.bgset.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" defer></script>
+
+    <style>
+        /* Reset and layout baseline */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #fafafa;
+            overflow-x: hidden;
+        }
+
+        /* Hero Wrapper */
+        .collection-hero {
+            position: relative;
+            width: 100%;
+            height: 70vh; /* Banner takes up 70% of screen height */
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* The Parallax Container from your snippet */
+        .parallax-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            will-change: transform;
+        }
+
+        /* The actual Image layer */
+        .parallax-image {
+            position: absolute;
+            top: -20%; /* Extra height padding so image doesn't expose whitespace when scrolling */
+            left: 0;
+            width: 100%;
+            height: 140%; 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            will-change: transform;
+        }
+
+        /* Overlay text styling */
+        .hero-title {
+            position: relative;
+            z-index: 2;
+            color: white;
+            font-size: 3.5rem;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        /* Generous dummy page space to allow deep scrolling */
+        .main-content {
+            padding: 80px 24px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .main-content h2 {
+            font-size: 2rem;
+            color: #222;
+            margin-bottom: 20px;
+        }
+
+        .main-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="collection-hero">
+        
+        <div class="parallax-container">
+            <div class="parallax-image collection-hero__image lazyload" data-bgset="
+                https://cdn.shopify.com/s/files/1/0251/0870/9412/collections/custom_resized_174f1d7f-7d2b-44bf-ab98-1b6af67150bb_180x.jpg?v=1652441549 180w,
+                https://cdn.shopify.com/s/files/1/0251/0870/9412/collections/custom_resized_174f1d7f-7d2b-44bf-ab98-1b6af67150bb_360x.jpg?v=1652441549 360w,
+                https://cdn.shopify.com/s/files/1/0251/0870/9412/collections/custom_resized_174f1d7f-7d2b-44bf-ab98-1b6af67150bb_540x.jpg?v=1652441549 540w,
+                https://cdn.shopify.com/s/files/1/0251/0870/9412/collections/custom_resized_174f1d7f-7d2b-44bf-ab98-1b6af67150bb_720x.jpg?v=1652441549 720w,
+                https://cdn.shopify.com/s/files/1/0251/0870/9412/collections/custom_resized_174f1d7f-7d2b-44bf-ab98-1b6af67150bb_900x.jpg?v=1652441549 900w,
+                https://cdn.shopify.com/s/files/1/0251/0870/9412/collections/custom_resized_174f1d7f-7d2b-44bf-ab98-1b6af67150bb_1080x.jpg?v=1652441549 1080w,
+                https://cdn.shopify.com/s/files/1/0251/0870/9412/collections/custom_resized_174f1d7f-7d2b-44bf-ab98-1b6af67150bb_1296x.jpg?v=1652441549 1296w,
+                https://cdn.shopify.com/s/files/1/0251/0870/9412/collections/custom_resized_174f1d7f-7d2b-44bf-ab98-1b6af67150bb_1512x.jpg?v=1652441549 1512w,
+                https://cdn.shopify.com/s/files/1/0251/0870/9412/collections/custom_resized_174f1d7f-7d2b-44bf-ab98-1b6af67150bb_1728x.jpg?v=1652441549 1728w
+            " style="background-image: url('https://cdn.shopify.com/s/files/1/0251/0870/9412/collections/custom_resized_174f1d7f-7d2b-44bf-ab98-1b6af67150bb_1728x.jpg?v=1652441549');">
+                <picture style="display: none;">
+                    <source data-srcset="https://cdn.shopify.com/s/files/1/0251/0870/9412/collections/custom_resized_174f1d7f-7d2b-44bf-ab98-1b6af67150bb_180x.jpg?v=1652441549 180w, https://cdn.shopify.com/s/files/1/0251/0870/9412/collections/custom_resized_174f1d7f-7d2b-44bf-ab98-1b6af67150bb_360x.jpg?v=1652441549 360w, https://cdn.shopify.com/s/files/1/0251/0870/9412/collections/custom_resized_174f1d7f-7d2b-44bf-ab98-1b6af67150bb_540x.jpg?v=1652441549 540w, https://cdn.shopify.com/s/files/1/0251/0870/9412/collections/custom_resized_174f1d7f-7d2b-44bf-ab98-1b6af67150bb_720x.jpg?v=1652441549 720w, https://cdn.shopify.com/s/files/1/0251/0870/9412/collections/custom_resized_174f1d7f-7d2b-44bf-ab98-1b6af67150bb_900x.jpg?v=1652441549 900w, https://cdn.shopify.com/s/files/1/0251/0870/9412/collections/custom_resized_174f1d7f-7d2b-44bf-ab98-1b6af67150bb_1080x.jpg?v=1652441549 1080w, https://cdn.shopify.com/s/files/1/0251/0870/9412/collections/custom_resized_174f1d7f-7d2b-44bf-ab98-1b6af67150bb_1296x.jpg?v=1652441549 1296w, https://cdn.shopify.com/s/files/1/0251/0870/9412/collections/custom_resized_174f1d7f-7d2b-44bf-ab98-1b6af67150bb_1512x.jpg?v=1652441549 1512w, https://cdn.shopify.com/s/files/1/0251/0870/9412/collections/custom_resized_174f1d7f-7d2b-44bf-ab98-1b6af67150bb_1728x.jpg?v=1652441549 1728w" sizes="1583px">
+                    <img alt="" class="lazyautosizes lazyload" data-sizes="auto" data-parent-fit="cover">
+                </picture>
+            </div>
+        </div>
+
+        <h1 class="hero-title">Our Collection</h1>
+    </header>
+
+    <main class="main-content">
+        <h2>Smooth Parallax & Lazy Loading Active</h2>
+        <p>Your original code leverages the <code>lazyloaded</code> class configuration typical of premium Shopify themes. By attaching the <code>lazysizes</code> framework directly to this page, the component dynamically swaps your background images on-the-fly to serve optimized payloads for mobile vs desktop displays.</p>
+        
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin elementum quam non lectus eleifend, id fringilla diam efficitur. Integer feugiat accumsan mollis. Praesent ut lorem vitae lorem tristique interdum. In pretium, nibh sit amet eleifend pretium, ligula augue scelerisque risus, eget convallis magna turpis eget metus.</p>
+        
+        <p>Aenean vestibulum scelerisque hendrerit. Phasellus commodo ex vel arcu elementum rhoncus. Aliquam efficitur ac massa eget maximus. Pellentesque finibus scelerisque ante. Phasellus fermentum nunc at tellus varius vehicula. Vestibulum aliquet nulla mi, nec accumsan sem pretium sed. In imperdiet libero arcu, vitae molestie velit imperdiet a.</p>
+        
+        <p>Curabitur efficitur magna id enim vulputate, nec euismod turpis tempor. Etiam eget diam sem. Vivamus facilisis, leo a rhoncus hendrerit, nibh magna eleifend justo, pellentesque iaculis turpis massa interdum ipsum. Curabitur sed nisl vitae nibh mollis feugiat accumsan congue arcu.</p>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const parallaxImage = document.querySelector('.parallax-image');
+            
+            window.addEventListener('scroll', function() {
+                // Track how far down the page the user has scrolled
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                // 0.3 defines the parallax intensity (lower = slower movement)
+                let yOffset = scrollTop * 0.3;
+                
+                // Smoothly translate the image container down to cause a relative speed mismatch
+                parallaxImage.style.transform = `translate3d(0px, ${yOffset}px, 0px)`;
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,268 @@
+
+
+<div class="variant-details0">
+  
+  
+  <div style="padding-top:0;padding-bottom:0;margin-bottom:0;">
+    Apply all&nbsp;&nbsp;
+    <input type="text" class="all-input-qty" id="all_input_qty" name="all-input-qty" style="width:65px;height:25px;min-height:25px;text-align:center;font-size:14px;" value="" placeholder="0" onfocus="this.placeholder=''" onblur="this.placeholder='0'">
+  </div>
+  
+  
+  <div class="pack_table">
+  
+    {% assign my_bundle_title = product.metafields.my_fields.my_bundle.value.header %}
+    {% assign my_bundle_value = product.metafields.my_fields.my_bundle.value.items %}
+
+  <table>
+    
+    <thead>
+      <tr>
+        {%- for table_title in my_bundle_title -%}
+          {%- if table_title != "VARIANT_ID" and table_title != "TITLE"  -%}
+             <th class="pack input_items qty">
+               <span class="varinant_titles">{{ table_title }}</span>
+        	 </th>
+          {%- endif -%}
+        {%- endfor -%}
+      </tr>
+    </thead>
+    
+    <tbody>
+            
+        {%- for table_values in my_bundle_value -%}
+         	
+      	{%- assign variant_id = table_values[0] -%}
+        {%- assign small_value = table_values[1] -%}
+        {%- assign medium_value = table_values[2] -%}
+        {%- assign large_value = table_values[3] -%}
+        {%- assign extralarge_value = table_values[4] -%}
+        {%- assign xxlarge_value = table_values[5] -%}
+        {%- assign price_value = table_values[6] -%}
+        {%- assign pack_data = table_values[7] -%}
+        {%- assign amount_value = table_values[8] -%}
+        {%- assign qty_value = table_values[9] -%}
+        {%- assign btn_text = table_values[10] -%}
+        {%- assign size_index = table_values[11] -%}
+        {%- assign color_index = table_values[12] -%}
+    
+<!--       	{{variant_id}}
+      	{{ small_value }}
+        {{ medium_value }}
+        {{ large_value }}
+        {{ extralarge_value }}
+        {{ xxlarge_value }}
+        {{ price_value }}
+        {{ pack_data }}
+        {{ amount_value }}
+        {{ qty_value }}
+        {{ btn_text }}
+        {{ size_index }} -->
+
+      	<tr class="allproduct_calc">
+              <td class="pack input_item qty" data-quantity="{{small_value}}">
+                <span class="variant_value" id="variant-size">{{ small_value }}</span>
+              </td>
+          	  <td class="pack input_item qty" data-quantity="{{medium_value}}">
+                <span class="variant_value" id="variant-size">{{ medium_value }}</span>
+              </td>
+              <td class="pack input_item qty" data-quantity="{{large_value}}">
+                <span class="variant_value" id="variant-size">{{ large_value }}</span>
+              </td>
+              <td class="pack input_item qty" data-quantity="{{extralarge_value}}">
+                <span class="variant_value" id="variant-size">{{ extralarge_value }}</span>
+              </td>
+              <td class="pack input_item qty" data-quantity="{{xxlarge_value}}">
+                <span class="variant_value" id="variant-size">{{ xxlarge_value }}</span>
+              </td>
+          	 <td class="pack color_variant__price qty" data-color="{{color_index}}">
+                <span class="pack__price">{{color_index}}</span>	
+              </td>	
+              <td class="pack td_text-price qty" data-price="{{price_value}}">
+                <span class="pack__price">${{price_value}}</span>	
+              </td>
+              <td class="pack td_text-input qty" data-totalqty="{{pack_data}}">
+                <span class="pack__qty">{{pack_data}}</span>	
+              </td>
+              <td class="pack td_amount qty" data-amount="{{amount_value}}">
+                <span class="pack_amount">${{amount_value}}</span>	
+              </td>
+              <td class="pack td_input qty">
+                <label>{{ qty_value }}</label>               
+                <input type="number" min="0" class="product_item_qty custom-input-qty" name="" rel="" value="0" placeholder="0" data-variantId="{{variant_id}}" data-allqty="0"  data-price="0"   data-title="{{size_index}}" />
+              </td>
+        </tr>
+        {%- endfor -%}
+         
+    </tbody>
+  
+  </table>
+  </div>  
+  
+<!-- Total Value -->
+  <div class="total_value">
+  		<table class="table_data">
+          <tbody>
+            <tr>
+              <td align="right" style="height:30px;border-right:1px solid #cccccc;">Total&nbsp;<span id="total_qty">0</span> Pcs&nbsp;
+              </td>
+              <td style="vertical-align:middle;text-align:center;border-right:1px solid #cccccc;border-bottom:1px solid #cccccc;border-top:1px solid #cccccc;width:90px;">$<span id="total_amount">0.00</span>
+              </td>
+              <td style="vertical-align:middle;text-align:center;border-right:1px solid #cccccc;border-bottom:1px solid #cccccc;border-top:1px solid #cccccc;width:65px;">
+                <span id="total_pack">0</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>  
+  </div>
+  
+  
+<!-- ADD TO CART -->
+  <div class="add_to_cart">
+  
+    <div class="form-group cart ">
+      <div class="product_variants">
+       {% for variant in product.variants %}
+          <input type="hidden" name="id" value="{{ variant.id}}" />
+        {% endfor %}  
+      <span class="qty">
+      </span>
+      <button type="button" id="button_cart" data-loading-text="Loading..." class="button_cart0 button">
+        <span class="button-cart-text">Add to Cart</span>
+      </button>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script type="text/javascript">
+  
+  function calcProductAvg(){   
+     
+         let qty_wdtTotal = 0 ;
+         let pcs_wdtTotal = 0 ;
+    	 let bundle_pack_wdtTotal = 0 ;
+    
+         document.querySelectorAll('.allproduct_calc').forEach(function(element, index, array){
+           let wdt_org_qty = 0;
+           
+           let bundle_pack = 0;
+           
+           let allproduct = document.querySelectorAll('.allproduct_calc')[index];
+           
+           let qty_val = allproduct.querySelector(".product_item_qty").value;
+           
+           console.log("INPUT-VALUE: ", qty_val)
+           
+           
+           
+           if(qty_val > 0){
+             let trtd = allproduct.querySelector('td[data-quantity]');
+           	 let price_val = allproduct.querySelector('.td_text-price').getAttribute('data-price');
+             
+             let lengthtd = allproduct.querySelectorAll(".input_item").length;
+             if(lengthtd > 0){
+               for (let i = 0; i < lengthtd; i++) {
+                 let dataQuantity = allproduct.querySelectorAll(".input_item")[i].getAttribute('data-quantity');
+                 
+                 wdt_org_qty += parseInt(dataQuantity);
+                 
+               }
+               
+             } 
+             
+              for (let i = 0; i <= lengthtd; i++) {                
+                 bundle_pack += parseInt(qty_val);                 
+              }
+             
+             let qtyOp = wdt_org_qty*qty_val;
+             
+             pcs_wdtTotal += qtyOp;
+             
+
+             let listPrice = (parseFloat(qtyOp) * parseFloat(price_val));
+             allproduct.querySelector('.pack__qty').innerHTML = wdt_org_qty*qty_val;
+             allproduct.querySelector('.pack_amount').innerHTML = listPrice.toFixed(2);
+             
+             qty_wdtTotal = (parseFloat(qty_wdtTotal) + parseFloat(listPrice));
+             
+             allproduct.querySelector(".product_item_qty").setAttribute("data-allqty", (wdt_org_qty*qty_val));
+             allproduct.querySelector(".product_item_qty").setAttribute("data-price", listPrice.toFixed(2));
+             
+           }
+           
+           bundle_pack_wdtTotal = bundle_pack;
+         });
+    	
+    	 document.getElementById("total_amount").innerHTML = qty_wdtTotal.toFixed(2);
+         document.getElementById("total_qty").innerHTML = pcs_wdtTotal; 
+         document.getElementById("total_pack").innerHTML = bundle_pack_wdtTotal;
+    
+  }
+  
+  const divs = document.querySelectorAll('.product_item_qty');
+  divs.forEach(el => el.addEventListener('change', event => {
+      document.getElementById("all_input_qty").value = '0';
+      calcProductAvg();
+  }));
+ 
+  document.getElementById('all_input_qty').addEventListener('change', function(event) {
+      var qtyp = document.getElementById("all_input_qty").value;
+      let lengthI = document.querySelectorAll(".product_item_qty").length;
+      if(lengthI > 0){
+         for (let i = 0; i < lengthI; i++) {
+           document.querySelectorAll(".product_item_qty")[i].value = qtyp;
+         }
+      }
+      calcProductAvg();
+  })
+   
+  
+  /* ADD TO CART FUNCTION */
+  
+  function addTocartScript(formData){
+    setTimeout( function() {
+          var url =  '/cart/add.js';
+          fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+          })
+          .then(response => {
+            window.location.href="/cart";
+            return response.json();
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          }); 
+        }, 300 );
+  }
+
+  const add_to_cart =  document.getElementById("button_cart"); 
+  add_to_cart.addEventListener("click", function(event){
+    var productItem = [];
+    
+    document.querySelectorAll('.product_item_qty[value]').forEach(function(element, index, array){
+      var qty = element.value;
+      if(qty > 0){
+        let variantId = element.getAttribute('data-variantId');
+        let allqty = element.getAttribute('data-allqty');
+        let price = element.getAttribute('data-price');
+        let title = element.getAttribute('data-title');        
+        productItem.push({"id": variantId, "quantity": allqty, "properties": {"TITLE": title, "AMOUNT": price,"PACK": qty}});
+      }      
+    });    
+    var formData = {'items': productItem};      
+    addTocartScript(formData);    
+    
+  });
+
+</script>
+
+
+
+

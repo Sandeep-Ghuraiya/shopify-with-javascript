@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {%- if section.settings.banner_image -%}
+    <div class="about-hero__image-container media gradient">
+      <img
+        srcset="{%- if section.settings.banner_image.width >= 165 -%}{{ section.settings.banner_image | image_url: width: 165 }} 165w,{%- endif -%}
+          {%- if section.settings.banner_image.width >= 360 -%}{{ section.settings.banner_image | image_url: width: 360 }} 360w,{%- endif -%}
+          {%- if section.settings.banner_image.width >= 535 -%}{{ section.settings.banner_image | image_url: width: 535 }} 535w,{%- endif -%}
+          {%- if section.settings.banner_image.width >= 750 -%}{{ section.settings.banner_image | image_url: width: 750 }} 750w,{%- endif -%}
+          {%- if section.settings.banner_image.width >= 1070 -%}{{ section.settings.banner_image | image_url: width: 1070 }} 1070w,{%- endif -%}
+          {%- if section.settings.banner_image.width >= 1500 -%}{{ section.settings.banner_image | image_url: width: 1500 }} 1500w,{%- endif -%}
+          {{ section.settings.banner_image | image_url }} {{ section.settings.banner_image.width }}w"
+        src="{{ section.settings.banner_image | image_url: width: 750 }}"
+        sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc(50vw - 130px), calc(50vw - 55px)"
+        alt="{{ collection.title | escape }}"
+        width="{{ section.settings.banner_image.width }}"
+        height="{{ section.settings.banner_image.height }}"
+      >
+    </div>
+  {%- endif -%}
+</body>
+</html>

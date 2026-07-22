@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        box-sizing: content-box;
+        background-color: aquamarine;
+      }
+
+      section {
+        width: 100%;
+        height: 100%;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 4rem 8rem;
+      }
+
+      .grid {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .legend {
+        margin-right: 30px;
+      }
+
+      .legend legend {
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        word-spacing: 2px;
+      }
+
+      select#myList {
+        display: none;
+      }
+
+      div#selected_option {
+        border: 1px solid #b26b53;
+        padding: 8px 12px;
+        font-size: 18px;
+        position: relative;
+      }
+
+      div#option {
+        border: 1px solid #b26b53;
+        background-color: #f4f4f4;
+        padding: 0px 12px;
+      }
+
+      .option {
+        width: 100%;
+        padding: 8px 0px;
+        cursor: pointer;
+        font-size: 18px;
+      }
+
+      div#selected_option:before {
+        content: "";
+        position: absolute;
+        border: 8px solid red;
+        right: 8px;
+        transform: rotate(45deg);
+        border-top: 8px solid transparent;
+        border-left: 8px solid transparent;
+        top: 6px;
+        transition: transform 1s ease-in-out;
+      }
+
+      div#selected_option:after {
+        visibility: hidden;
+        content: "";
+        position: absolute;
+        border: 8px solid red;
+        right: 8px;
+        transform: rotate(45deg);
+        border-bottom: 8px solid transparent;
+        border-right: 8px solid transparent;
+        top: 6px;
+        transition: transform 1s ease-in-out;
+      }
+
+      .select {
+        position: relative;
+        /* margin-bottom: 15px; */
+        width: 250px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .select .selectBtn {
+        background: var(--bg1);
+        padding: 10px;
+        box-sizing: border-box;
+        border-radius: 3px;
+        width: 100%;
+        cursor: pointer;
+        position: relative;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background: #fff;
+      }
+      .select .selectBtn:after {
+        content: "";
+        position: absolute;
+        top: 45%;
+        right: 15px;
+        width: 6px;
+        height: 6px;
+        -webkit-transform: translateY(-50%) rotate(45deg);
+        transform: translateY(-50%) rotate(45deg);
+        border-right: 2px solid #666;
+        border-bottom: 2px solid #666;
+        transition: 0.2s ease;
+      }
+      .select .selectBtn.toggle {
+        border-radius: 3px 3px 0 0;
+      }
+      .select .selectBtn.toggle:after {
+        -webkit-transform: translateY(-50%) rotate(-135deg);
+        transform: translateY(-50%) rotate(-135deg);
+      }
+      .select .selectDropdown {
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        border-radius: 0 0 3px 3px;
+        overflow: hidden;
+        background: var(--bg1);
+        border-top: 1px solid #eee;
+        z-index: 1;
+        background: #fff;
+        -webkit-transform: scale(1, 0);
+        transform: scale(1, 0);
+        -webkit-transform-origin: top center;
+        transform-origin: top center;
+        visibility: hidden;
+        transition: 0.2s ease;
+        box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+      }
+      .select .selectDropdown .option {
+        padding: 10px;
+        box-sizing: border-box;
+        cursor: pointer;
+      }
+      .select .selectDropdown .option:hover {
+        background: #f8f8f8;
+      }
+      .select .selectDropdown.toggle {
+        visibility: visible;
+        -webkit-transform: scale(1, 1);
+        transform: scale(1, 1);
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <div class="container">
+        <div class="page-width">
+          <div class="grid">
+            <div class="legend">
+              <legend>one scent</legend>
+            </div>
+            <div class="select_section">
+              <div class="add_data">
+                <div class="select selective">
+                  <div
+                    class="selectBtn first_select"
+                    id="selected_option"
+                    data-type=""
+                  >
+                    4oz
+                  </div>
+                  <div class="selection selectDropdown" id="option">
+                    <div class="option" data-type="">4oz</div>
+                    <div class="option" data-type="">8oz</div>
+                    <div class="option" data-type="">12oz</div>
+                    <div class="option" data-type="">16oz</div>
+                    <div class="option" data-type="">20oz</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      const select = document.querySelectorAll(".selectBtn");
+      const option = document.querySelectorAll(".option");
+      let index = 1;
+
+      select.forEach((a) => {
+        a.addEventListener("click", (b) => {
+          const next = b.target.nextElementSibling;
+          next.classList.toggle("toggle");
+          next.style.zIndex = index++;
+        });
+      });
+      option.forEach((a) => {
+        console.log(a.textContent);
+        a.addEventListener("click", (b) => {
+          console.log("====================================");
+          let data_values = b.target.innerText;
+          console.log("====================================");
+          b.target.parentElement.classList.remove("toggle");
+
+          const parent = b.target.closest(".select").children[0];
+          parent.setAttribute("data-type", data_values);
+          parent.innerText = b.target.innerText;
+        });
+      });
+    </script>
+  </body>
+</html>
